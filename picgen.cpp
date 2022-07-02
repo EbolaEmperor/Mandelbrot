@@ -2,6 +2,7 @@
 #include "axis.h"
 #include "mandelbrot.h"
 #include <cmath>
+#include <cstring>
 
 int main(int argc, char* argv[])
 {
@@ -10,13 +11,22 @@ int main(int argc, char* argv[])
     Cordinate center = (Cordinate){0.0, 0.0};
     double diam = 5.0;
     int N = 100;
+    int winWidth = 1920;
+    int winHeight = 1080;
 
     if(argc >= 2) fname = argv[1];
     if(argc >= 4) center = (Cordinate){std::atof(argv[2]), std::atof(argv[3])};
     if(argc >= 5) diam = std::atof(argv[4]);
     if(argc >= 6) N = std::atoi(argv[5]);
+    if(argc >= 7)
+    {
+        if(strcmp(argv[6], "low") == 0) winWidth = 427, winHeight = 240;
+        if(strcmp(argv[6], "mid") == 0) winWidth = 854, winHeight = 480;
+        if(strcmp(argv[6], "high") == 0) winWidth = 1920, winHeight = 1080;
+        if(strcmp(argv[6], "4k") == 0) winWidth = 3840, winHeight = 2160;
+    }
 
-    axis myAxis(center, diam);  //根据中心和直径定义一个像素点坐标-轴坐标转换器
+    axis myAxis(winWidth, winHeight, center, diam);  //根据中心和直径定义一个像素点坐标-轴坐标转换器
     png myPng(myAxis.getWinHeight(), myAxis.getWinWidth());  //初始化一个png
 
     for(int i = 0; i < myAxis.getWinHeight(); i++)
