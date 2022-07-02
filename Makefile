@@ -1,7 +1,7 @@
 all:
-	g++ -o test -O2 -Ofast main.cpp mandelbrot.cpp axis.cpp png.cpp
+	g++ -o picgen -O2 -Ofast picgen.cpp mandelbrot.cpp axis.cpp png.cpp
 	g++ -o moviegen moviegen.cpp
 
 clear:
-	rm test
+	rm picgen
 	rm moviegen

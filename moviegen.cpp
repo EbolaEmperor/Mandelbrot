@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
     for(int i = 0; i < 3000; i++)
     {
-        sprintf(syscmd, "./test img/pic%d.png %.8lf %.8lf %.15lf %d", i, x, y, d, n);
+        sprintf(syscmd, "./picgen img/pic%d.png %.8lf %.8lf %.15lf %d", i, x, y, d, n);
         if(i%4==branch)  //branch的用途见此处
         {
             printf("%s\n", syscmd);
