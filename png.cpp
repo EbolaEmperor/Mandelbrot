@@ -165,6 +165,11 @@ void png::setpix(const int &row, const int &col, const unsigned char &R, const u
     b[row*m+col] = B;
 }
 
+void png::setpix(const int &row, const int &col, const RGB &color)
+{
+    setpix(row, col, color.r, color.g, color.b);
+}
+
 void png::output(const char* fname)
 {
     len = 0;

@@ -1,6 +1,8 @@
 #ifndef _PNG_H_
 #define _PNG_H_
 
+#include "color.h"
+
 class png
 {
 private:
@@ -22,6 +24,7 @@ public:
     png(const int &, const int &, const unsigned char*, const unsigned char*, const unsigned char*);
     ~png();
     void setpix(const int &, const int &, const unsigned char &, const unsigned char &, const unsigned char &);
+    void setpix(const int &, const int &, const RGB &);
     void output(const char*);
 };
 

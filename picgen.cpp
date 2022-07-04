@@ -1,6 +1,7 @@
 #include "png.h"
 #include "axis.h"
 #include "mandelbrot.h"
+#include "color.h"
 #include <cmath>
 #include <cstring>
 
@@ -41,13 +42,9 @@ int main(int argc, char* argv[])
                     break;
             }
             if(man.unconverged())  //对不收敛区域进行着色
-            {
-                unsigned char red = (unsigned char)(255*log2(man.getIterTimes()));
-                unsigned char green = (unsigned char)(155*log2(man.getIterTimes()));
-                myPng.setpix(i, j, red, green, 150);
-            }
+                myPng.setpix(i, j, colorFunc3(man.getIterTimes()));
             else
-                myPng.setpix(i, j, 0, 0, 0);
+                myPng.setpix(i, j, BLACK);
         }
     
     myPng.output(fname);

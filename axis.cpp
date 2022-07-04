@@ -30,8 +30,8 @@ Pix axis::cord2pix(const Cordinate &c) const
     Pix centerPix = (Pix){winHeight/2, winWidth/2};
     Pix result;
     int maxLength = std::max(winHeight, winWidth);
-    result.x = (c.x-center.x)/diam*maxLength + centerPix.y;
-    result.y = centerPix.x - (c.y-center.y)/diam*maxLength;
+    result.y = (c.x-center.x)/diam*maxLength + centerPix.y;
+    result.x = centerPix.x - (c.y-center.y)/diam*maxLength;
     return result;
 }
 
