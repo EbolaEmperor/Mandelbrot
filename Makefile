@@ -1,7 +1,7 @@
 all:
-	g++ -o picgen -O2 -Ofast picgen.cpp mandelbrot.cpp axis.cpp png.cpp color.cpp
-	g++ -o moviegen moviegen.cpp axis.cpp
+	g++ -O2 -Ofast -c picgen.cpp FunIter.cpp axis.cpp png.cpp color.cpp
+	ar -crv libpicgen.a picgen.o FunIter.o axis.o png.o color.o
+	rm *.o
 
-clear:
-	rm picgen
-	rm moviegen
+clean:
+	rm *.a

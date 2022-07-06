@@ -17,6 +17,7 @@ struct RGB
 RGB colorFunc1(const int &n);
 RGB colorFunc2(const int &n);
 RGB colorFunc3(const int &n);
+RGB colorFuncContinous(const int &n);
 RGB colorFuncVango(const int &n);
 
 #endif

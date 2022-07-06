@@ -3,7 +3,7 @@
 #include <cstring>
 #include <iostream>
 #include "png.h"
-#include "lib/miniz.c"
+#include "zlib/miniz.c"
 
 
 void png::print(unsigned char x)

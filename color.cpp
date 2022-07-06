@@ -30,6 +30,18 @@ RGB colorFunc3(const int &n)
     };
 }
 
+RGB colorFuncContinous(const int &n)
+{
+    unsigned long long r = (unsigned long long)(255*log2(n))%512u;
+    if(r >= 256u) r = 512u-r;
+    return (RGB)
+    {
+        (unsigned char) r,
+        (unsigned char)(155*log2(n)),
+        150
+    };
+}
+
 RGB colorFuncVango(const int &n)
 {
     static const RGB vansColor[5] =

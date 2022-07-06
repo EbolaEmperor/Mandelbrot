@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     system("mkdir img");
     for(int i = 0; i < 1150; i++)
     {
-        if(i%5==0)
+        if(i%2==0)
         {
             if(fixPix.x > 540) fixPix.x--;
             if(fixPix.x < 540) fixPix.x++;
@@ -31,10 +31,10 @@ int main(int argc, char* argv[])
         axis ithAxis((Cordinate){x,y}, d);
         Cordinate center = ithAxis.pix2cord((Pix){1080-fixPix.x, 1920-fixPix.y});
         sprintf(syscmd, "./picgen img/pic%d.png %.20lf %.20lf %.20lf %d", i, center.x, center.y, d, (int)round(n));
-        if(i%4==branch)  //branch的用途见此处
+        if(i%50==branch)  //branch的用途见此处
         {
             printf("%s\n", syscmd);
-            system(syscmd);
+            //system(syscmd);
         }
         d *= 0.9895;
         d *= 0.9895;
