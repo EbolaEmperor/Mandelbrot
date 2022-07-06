@@ -3,11 +3,11 @@
 
 #include <complex>
 
-void mandelbrotGen(std::complex<double> (*fun)(const std::complex<double> &, const std::complex<double> &), const double, const char *, 
-                   const double, const double, const double, const int, const int, const int);
+void mandelbrotGen(std::complex<double> (*fun)(const std::complex<double> &, const std::complex<double> &), const double maxConvergeRadio, const char *Fname, 
+                   const double centerX, const double centerY, const double diam, const int N, const int winWidth, const int winHeight);
 
-void juliaGen(std::complex<double> (*fun)(const std::complex<double> &, const std::complex<double> &), const double, const char *, 
-                   const double, const double, const double, const double, const double, const int, const int, const int);
+void juliaGen(std::complex<double> (*fun)(const std::complex<double> &, const std::complex<double> &), const double maxConvergeRadio, const char *Fname, 
+                   const double constX, const double constY, const double centerX, const double centerY, const double diam, const int N, const int winWidth, const int winHeight);
 
 
 #endif
