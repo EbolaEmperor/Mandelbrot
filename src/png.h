@@ -8,7 +8,7 @@ class png
 private:
     unsigned char *r, *g, *b;
     unsigned char *buffer;
-    unsigned int len,n,m;
+    unsigned int len, n, m;
     void print(unsigned char x);
     void printi(unsigned int x);
     void alder32(unsigned char *v,int n);
@@ -26,6 +26,7 @@ public:
     void setpix(const int &, const int &, const unsigned char &, const unsigned char &, const unsigned char &);
     void setpix(const int &, const int &, const RGB &);
     void output(const char*);
+    void sync();
 };
 
 #endif

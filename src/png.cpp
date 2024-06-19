@@ -4,7 +4,7 @@
 #include <iostream>
 #include "png.h"
 #include "zlib/miniz.c"
-
+#include <mpi.h>
 
 void png::print(unsigned char x)
 {
@@ -180,4 +180,14 @@ void png::output(const char* fname)
     fclose(fout);
     delete [] buffer;
     buffer = nullptr;
+}
+
+void png::sync(){
+    auto tmp = new unsigned char [n*m];
+    memcpy(tmp, r, n*m);
+    MPI_Allreduce(tmp, r, n*m, MPI_CHAR, MPI_SUM, MPI_COMM_WORLD);
+    memcpy(tmp, g, n*m);
+    MPI_Allreduce(tmp, g, n*m, MPI_CHAR, MPI_SUM, MPI_COMM_WORLD);
+    memcpy(tmp, b, n*m);
+    MPI_Allreduce(tmp, b, n*m, MPI_CHAR, MPI_SUM, MPI_COMM_WORLD);
 }

@@ -5,6 +5,7 @@
 #include "picgen.h"
 #include <cmath>
 #include <string>
+#include <mpi.h>
 
 void mandelbrotGen(IterFunc fun, 
                    const double maxConvergeRadio, 
@@ -22,7 +23,14 @@ void mandelbrotGen(IterFunc fun,
     axis myAxis(winWidth, winHeight, center, diam);  //根据中心和直径定义一个像素点坐标-轴坐标转换器
     png myPng(myAxis.getWinHeight(), myAxis.getWinWidth());  //初始化一个png
 
-    for(int i = 0; i < myAxis.getWinHeight(); i++)
+    int nProcs, procID;
+    MPI_Comm_size(MPI_COMM_WORLD, &nProcs);
+    MPI_Comm_rank(MPI_COMM_WORLD, &procID);
+    int L = procID * (myAxis.getWinHeight() / nProcs);
+    int R = (procID == nProcs - 1) ? 
+            myAxis.getWinHeight() :
+            (procID + 1) * (myAxis.getWinHeight() / nProcs); 
+    for(int i = L; i < R; i++)
         for(int j = 0; j < myAxis.getWinWidth(); j++){
             Cordinate cord = myAxis.pix2cord((Pix){i,j});  //计算像素点(i,j)对应的轴坐标
             FunIter man(fun, maxConvergeRadio, 0.0, 0.0, cord.x, cord.y, N);   //给定迭代常数定义一个Mandelbrot迭代器
@@ -37,7 +45,9 @@ void mandelbrotGen(IterFunc fun,
                 myPng.setpix(i, j, BLACK);
         }
     
-    myPng.output(fname);
+    myPng.sync();
+    if(procID == 0)
+        myPng.output(fname);
 }
 
 /*

@@ -1,4 +1,5 @@
 #include "picgen.h"
+#include <mpi.h>
 
 MPComplex fun(const MPComplex &z, const MPComplex &c){
     return z * z + c;
@@ -8,8 +9,8 @@ MPComplex fun2(const MPComplex &z, const MPComplex &c){
     return z*z*z*z + z*z*z / (z-1.0) + (z*z)/(z*z*z + z*z*4.0 + 5.0) + c;
 }
 
-int main()
-{
+int main(){
+    MPI_Init(NULL, NULL);
     mandelbrotGen(fun, 
                   2.0, 
                   "mandelbrot.png", 
@@ -18,10 +19,12 @@ int main()
                 //    MPFloat("0.00000000000000002"), 
                   -0.726246869413187002Q,
                    0.240376999706964968Q,
-                   5.0Q,//0.00000000000000001Q,
-                  200, 
-                  1920, 
-                  1080);
+                   0.000000000000000002Q,
+                  150000, 
+                  192, 
+                  108);
+    MPI_Barrier(MPI_COMM_WORLD);
+    MPI_Finalize();
     /*
     double constX = -2.0;
     for(int i = 0; i <= 4000; i++)
