@@ -16,9 +16,6 @@ public:
     GMPFloat(const GMPFloat& rhs): GMPFloat(){
         mpf_set(data, rhs.data);
     }
-    GMPFloat(const long int rhs): GMPFloat(){
-        mpf_set_si(data, rhs);
-    }
     GMPFloat(const double rhs): GMPFloat(){
         mpf_set_d(data, rhs);
     }
@@ -94,7 +91,8 @@ public:
     const Float& real() const{return _real;}
     const Float& image() const{return _image;}
     Complex() {}
-    Complex(const Float& r): _real(r) {}
+    Complex(const double& r): _real(r), _image(0.0) {}
+    Complex(const Float& r): _real(r), _image(0.0) {}
     Complex(const Float& r, const Float& i): _real(r), _image(i) {}
     Complex(const Complex<Float>& rhs): _real(rhs.real()), _image(rhs.image()) {}
     Complex<Float>& operator = (const Complex<Float> &rhs){

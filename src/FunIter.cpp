@@ -60,6 +60,6 @@ void FunIter::iterate(){
 		std::cerr << "Mandelbrot Error: Iteration times has already reach the max." << std::endl;
 		return;
 	}
-	iterFunc(curPoint, iterConst);
+	curPoint = iterFunc(curPoint, iterConst);
 	iterTimes ++;
 }
