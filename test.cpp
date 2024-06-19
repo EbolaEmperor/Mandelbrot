@@ -1,17 +1,28 @@
 #include "picgen.h"
-#include <complex>
 
-using std::complex;
-typedef complex<double> Complex;
+MPComplex fun(const MPComplex &z, const MPComplex &c){
+    return z * z + c;
+}
 
-Complex fun(const Complex &z, const Complex &c)
-{
-    return z*z*z*z + z*z*z/(z-1.0) + (z*z)/(z*z*z+4.0*z*z+5.0) + c;
+MPComplex fun2(const MPComplex &z, const MPComplex &c){
+    return z*z*z*z + z*z*z / (z-1.0) + (z*z)/(z*z*z + z*z*4.0 + 5.0) + c;
 }
 
 int main()
 {
-    mandelbrotGen(fun, 2.0, "mandelbrot.png", 0.0, 0.0, 5.0, 200, 1920, 1080);
+    mandelbrotGen(fun, 
+                  2.0, 
+                  "mandelbrot.png", 
+                //   MPFloat("-0.726246869413187002"), 
+                //    MPFloat("0.240376999706964972"), 
+                //    MPFloat("0.00000000000000002"), 
+                  -0.726246869413187002Q,
+                   0.240376999706964968Q,
+                   0.00000000000000001Q,
+                  150000, 
+                  192, 
+                  108);
+    /*
     double constX = -2.0;
     for(int i = 0; i <= 4000; i++)
     {
@@ -20,5 +31,6 @@ int main()
         juliaGen(fun, 2.0, fname, constX, 0.0, 0.0, 0.0, 5.0, 200, 1920, 1080);
         constX += 0.001;
     }
+    */
     return 0;
 }

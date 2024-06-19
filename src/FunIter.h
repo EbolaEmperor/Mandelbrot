@@ -1,27 +1,37 @@
 #ifndef _MANDELBROT_H_
 #define _MANDELBROT_H_
 
-#include <complex>
+#include "GMP_Wrapper.h"
+
+typedef MPComplex (*IterFunc)(const MPComplex &, const MPComplex &);
 
 class FunIter
 {
 private:
-    std::complex<double> curPoint, iterConst;
+    MPComplex curPoint, iterConst;
     int iterTimes, maxIterTimes;
-    std::complex<double> (*iterFunc)(const std::complex<double> &, const std::complex<double> &);
+    IterFunc iterFunc;
     double maxConvergeRadio;
 
 public:
     FunIter();
-    FunIter(std::complex<double> (*iterFunc)(const std::complex<double> &, const std::complex<double> &), const double &, 
-            const std::complex<double> &, const std::complex<double> &, const int &);
-    FunIter(std::complex<double> (*iterFunc)(const std::complex<double> &, const std::complex<double> &), const double &, 
-            const double &, const double &, const double &, const double &, const int &);
+    FunIter(IterFunc, 
+            const double &, 
+            const MPComplex &, 
+            const MPComplex &, 
+            const int &);
+    FunIter(IterFunc, 
+            const double &, 
+            const MPFloat &, 
+            const MPFloat &, 
+            const MPFloat &, 
+            const MPFloat &, 
+            const int &);
     ~FunIter();
     bool unconverged() const;
     bool reachedMaxTimes() const;
     int getIterTimes() const;
-    std::complex<double> getCurPoint() const;
+    MPComplex getCurPoint() const;
     void iterate();
 };
 

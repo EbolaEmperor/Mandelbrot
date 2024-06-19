@@ -1,13 +1,31 @@
 #ifndef _PICGEN_H_
 #define _PICGEN_H_
 
-#include <complex>
+#include "FunIter.h"
 
-void mandelbrotGen(std::complex<double> (*fun)(const std::complex<double> &, const std::complex<double> &), const double maxConvergeRadio, const char *Fname, 
-                   const double centerX, const double centerY, const double diam, const int N, const int winWidth, const int winHeight);
 
-void juliaGen(std::complex<double> (*fun)(const std::complex<double> &, const std::complex<double> &), const double maxConvergeRadio, const char *Fname, 
-                   const double constX, const double constY, const double centerX, const double centerY, const double diam, const int N, const int winWidth, const int winHeight);
+void mandelbrotGen(IterFunc fun, 
+                   const double maxConvergeRadio = 2.0, 
+                   const char *Fname = nullptr, 
+                   const MPFloat centerX = MPFloat(0), 
+                   const MPFloat centerY = MPFloat(0), 
+                   const MPFloat diam = MPFloat(5), 
+                   const int N = 100, 
+                   const int winWidth = 1920, 
+                   const int winHeight = 1080);
+
+
+void juliaGen(IterFunc fun, 
+              const double maxConvergeRadio = 2.0, 
+              const char *Fname = nullptr, 
+              const MPFloat constX = 0.0, 
+              const MPFloat constY = 0.0, 
+              const MPFloat centerX = 0.0, 
+              const MPFloat centerY = 0.0, 
+              const MPFloat diam = 5.0, 
+              const int N = 100, 
+              const int winWidth = 1920, 
+              const int winHeight = 1080);
 
 
 #endif
