@@ -11,19 +11,25 @@ MPComplex fun2(const MPComplex &z, const MPComplex &c){
 
 int main(){
     MPI_Init(NULL, NULL);
-    mandelbrotGen(fun, 
-                  2.0, 
-                  "mandelbrot.png", 
-                //   MPFloat("-0.726246869413187002"), 
-                //    MPFloat("0.240376999706964972"), 
-                //    MPFloat("0.00000000000000002"), 
-                  -0.726246869413187002Q,
-                   0.240376999706964968Q,
-                   0.000000000000000002Q,
-                  150000, 
-                  192, 
-                  108);
-    MPI_Barrier(MPI_COMM_WORLD);
+    int maxIter = 200;
+    MPFloat diam = 5.0Q;
+    for(int i = 0; i < 250; ++i){
+        char fname[30];
+        sprintf(fname, "output/mandelbrot%d.png", i);
+        if(i >= 220)
+            mandelbrotGen(fun, 
+                        2.0, 
+                        fname, 
+                        -0.726246869413187001644729Q,
+                        0.2403769997069649677934455Q,
+                        diam,
+                        maxIter, 
+                        1920, 
+                        1080);
+        maxIter *= 1.05;
+        diam *= 0.8;
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
     MPI_Finalize();
     /*
     double constX = -2.0;
