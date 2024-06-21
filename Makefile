@@ -1,6 +1,9 @@
-all: test.cpp lib/libpicgen.a
-	mpicxx test.cpp -Llib -lpicgen -lgmp -fopenmp -I src/ -o test -O2 -Ofast
+all: test.cpp libpicgen.a
+	mpicxx test.cpp -L. -lpicgen -lgmp -fopenmp -I src/ -o test -O2 -Ofast
 
-lib/libpicgen.a: src/*.h src/*.cpp
+libpicgen.a: src/*.h src/*.cpp
 	cd src && make
-	mv src/libpicgen.a lib/libpicgen.a
+	mv src/libpicgen.a libpicgen.a
+
+clean:
+	rm libpicgen.a test
